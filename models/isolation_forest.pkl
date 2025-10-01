@@ -1,0 +1,16 @@
+(This file  will be generated when you train and save your model. Use this code to create it ok? :)
+
+from sklearn.ensemble import IsolationForest
+import joblib
+import numpy as np
+
+# Generate dummy model for example
+model = IsolationForest(
+    n_estimators=100,
+    contamination=0.02,
+    random_state=42
+)
+model.fit(np.random.rand(100, 3))  # Replace with your actual training data
+
+# Save the model
+joblib.dump(model, 'models/isolation_forest.pkl')
