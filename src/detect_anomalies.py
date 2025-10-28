@@ -75,7 +75,12 @@ class AnomalyDetector:
 
 # Example usage
 if __name__ == "__main__":
+    """
+    Example usage of the AnomalyDetector class.
+    Demonstrates how to load a trained model and make predictions.
+    """
     try:
+        logger.info("Initializing AnomalyDetector...")
         detector = AnomalyDetector()
         user_input = {
             'Transaction_Amount': 1500,
@@ -83,6 +88,8 @@ if __name__ == "__main__":
             'Frequency_of_Transactions': 5
         }
         result = detector.predict(user_input)
-        print("Anomaly Detected!" if result else "Normal Transaction")
+        output = "Anomaly Detected!" if result else "Normal Transaction"
+        print(f"\nPrediction Result: {output}")
     except Exception as e:
+        logger.error(f"Error in example usage: {e}")
         print(f"Error: {e}")

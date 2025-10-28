@@ -21,6 +21,10 @@ RAW_TRANSACTION_FILE = DATA_DIR / "raw_transactions.csv"
 # Model files
 ISOLATION_FOREST_MODEL = MODEL_DIR / "isolation_forest.pkl"
 
+# Create directories if they don't exist
+DATA_DIR.mkdir(exist_ok=True)
+MODEL_DIR.mkdir(exist_ok=True)
+
 # Model hyperparameters - Isolation Forest configuration
 # These are default parameters; they can be overridden during training
 MODEL_CONFIG: Dict[str, Any] = {

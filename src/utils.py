@@ -35,7 +35,8 @@ def load_data(file_path: str) -> pd.DataFrame:
         if data.empty:
             raise ValueError("Data file is empty")
         
-        logger.info(f"Data loaded successfully - Records: {data.shape[0]}, Features: {data.shape[1]}")
+        num_records, num_features = data.shape
+        logger.info(f"Data loaded successfully - Records: {num_records}, Features: {num_features}")
         logger.info(f"Memory usage: {data.memory_usage(deep=True).sum() / 1024:.2f} KB")
         logger.debug(f"Column names: {list(data.columns)}")
         return data
@@ -91,7 +92,8 @@ def save_model(model: Any, path: str) -> None:
         model_dir.mkdir(parents=True, exist_ok=True)
         logger.info(f"Saving model to {path}")
         joblib.dump(model, path)
-        logger.info(f"Model saved successfully to {path}")
+        saved_file_size = Path(path).stat().st_size / 1024
+        logger.info(f"Model saved successfully to {path} ({saved_file_size:.2f} KB)")
     except Exception as e:
         logger.error(f"Error saving model: {str(e)}")
         raise
