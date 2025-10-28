@@ -37,6 +37,12 @@ REQUIRED_FEATURES = [
     'Frequency_of_Transactions'
 ]
 
+# Additional feature names
+ENGINEERED_FEATURES = [
+    'Is_Anomaly',
+    'Transaction_ZScore'
+]
+
 # Preprocessing configuration
 PREPROCESSING_CONFIG = {
     'threshold_std': 2.0,

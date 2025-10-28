@@ -14,14 +14,16 @@ class DataPreprocessor(BaseEstimator, TransformerMixin):
     based on transaction amounts using z-score methodology.
     """
     
-    def __init__(self, threshold_std=2.0):
+    def __init__(self, threshold_std=2.0, handle_nulls=True):
         """
         Initialize the preprocessor.
         
         Args:
             threshold_std: Number of standard deviations for anomaly threshold (default: 2.0)
+            handle_nulls: Whether to fill missing values (default: True)
         """
         self.threshold_std = threshold_std
+        self.handle_nulls = handle_nulls
         self.anomaly_threshold = None
         self.mean_amount = None
         self.std_amount = None
@@ -40,8 +42,13 @@ class DataPreprocessor(BaseEstimator, TransformerMixin):
         if 'Transaction_Amount' not in X.columns:
             raise ValueError("Missing required column: Transaction_Amount")
         
+        # Calculate statistics, handling potential NaN values
         self.mean_amount = X['Transaction_Amount'].mean()
         self.std_amount = X['Transaction_Amount'].std()
+        
+        if pd.isna(self.mean_amount) or pd.isna(self.std_amount):
+            raise ValueError("Cannot compute statistics: data contains invalid values")
+        
         self.anomaly_threshold = self.mean_amount + self.threshold_std * self.std_amount
         
         logger.info(f"Preprocessor fitted - Threshold: {self.anomaly_threshold:.2f}")
@@ -73,7 +80,8 @@ class DataPreprocessor(BaseEstimator, TransformerMixin):
             logger.warning("Standard deviation is zero, z-score set to 0")
         
         # Handle missing values
-        X = X.fillna(0)
+        if self.handle_nulls:
+            X = X.fillna(0)
         
         logger.info(f"Data transformed - {X['Is_Anomaly'].sum()} anomalies detected")
         return X

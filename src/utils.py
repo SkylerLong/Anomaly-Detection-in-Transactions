@@ -77,7 +77,15 @@ def save_model(model, path):
         raise
 
 def load_model(path):
-    """Load trained model from disk with validation"""
+    """
+    Load trained model from disk with validation.
+    
+    Args:
+        path: Path to the model file
+    
+    Returns:
+        Model: Loaded scikit-learn model
+    """
     if not Path(path).exists():
         raise FileNotFoundError(f"Model file not found: {path}")
     
@@ -90,7 +98,16 @@ def load_model(path):
         raise FileNotFoundError(f"Model loading failed: {str(e)}")
 
 def evaluate_model(y_true, y_pred):
-    """Generate classification metrics with validation"""
+    """
+    Generate classification metrics with validation.
+    
+    Args:
+        y_true: True labels
+        y_pred: Predicted labels
+    
+    Returns:
+        dict: Dictionary containing evaluation metrics
+    """
     if len(y_true) != len(y_pred):
         raise ValueError("Length mismatch between true labels and predictions")
     
@@ -105,7 +122,13 @@ def evaluate_model(y_true, y_pred):
     return metrics
 
 def save_metrics(metrics, path):
-    """Save evaluation metrics to JSON with validation"""
+    """
+    Save evaluation metrics to JSON with validation.
+    
+    Args:
+        metrics: Dictionary of metrics to save
+        path: Destination file path
+    """
     try:
         Path(path).parent.mkdir(parents=True, exist_ok=True)
         with open(path, 'w') as f:
