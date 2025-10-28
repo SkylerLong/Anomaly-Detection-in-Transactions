@@ -2,6 +2,11 @@ from sklearn.ensemble import IsolationForest
 from sklearn.metrics import classification_report, f1_score, accuracy_score, precision_score, recall_score
 import joblib
 import os
+import logging
+
+# Configure logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 def train_and_evaluate(X_train, X_test, y_test, contamination=0.02):
     """
@@ -33,6 +38,7 @@ def train_and_evaluate(X_train, X_test, y_test, contamination=0.02):
     
     # Save model
     joblib.dump(model, "models/isolation_forest.pkl")
+    logger.info("Model saved successfully")
     
     # Evaluate
     y_pred = model.predict(X_test)

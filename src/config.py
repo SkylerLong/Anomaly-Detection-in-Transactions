@@ -57,6 +57,7 @@ TARGET_NAMES = ['Normal', 'Anomaly']
 VALIDATION_THRESHOLDS = {
     'min_contamination': 0.001,
     'max_contamination': 0.5,
-    'min_data_rows': 10
+    'min_data_rows': 10,
+    'max_features': 100  # Maximum number of features
 }
 

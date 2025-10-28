@@ -65,8 +65,12 @@ class DataPreprocessor(BaseEstimator, TransformerMixin):
         # Add anomaly indicator
         X['Is_Anomaly'] = (X['Transaction_Amount'] > self.anomaly_threshold).astype(int)
         
-        # Add z-score feature
-        X['Transaction_ZScore'] = (X['Transaction_Amount'] - self.mean_amount) / self.std_amount
+        # Add z-score feature with protection against division by zero
+        if self.std_amount > 0:
+            X['Transaction_ZScore'] = (X['Transaction_Amount'] - self.mean_amount) / self.std_amount
+        else:
+            X['Transaction_ZScore'] = 0
+            logger.warning("Standard deviation is zero, z-score set to 0")
         
         # Handle missing values
         X = X.fillna(0)

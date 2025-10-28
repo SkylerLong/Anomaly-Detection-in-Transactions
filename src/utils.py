@@ -10,7 +10,15 @@ import logging
 logger = logging.getLogger(__name__)
 
 def load_data(file_path):
-    """Load transaction data from CSV with validation"""
+    """
+    Load transaction data from CSV with validation.
+    
+    Args:
+        file_path: Path to the CSV file
+    
+    Returns:
+        DataFrame: Loaded transaction data
+    """
     if not Path(file_path).exists():
         raise FileNotFoundError(f"Data file not found: {file_path}")
     
@@ -21,6 +29,9 @@ def load_data(file_path):
         
         logger.info(f"Data loaded successfully with {data.shape[0]} records and {data.shape[1]} features")
         return data
+    except pd.errors.EmptyDataError:
+        logger.error("CSV file is empty or malformed")
+        raise ValueError("Data file is empty or malformed")
     except Exception as e:
         logger.error(f"Error loading data: {str(e)}")
         raise ValueError(f"Error loading data: {str(e)}")

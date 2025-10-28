@@ -20,6 +20,15 @@ class AnomalyDetector:
             raise
 
     def predict(self, input_data):
+        """
+        Predict if input data is an anomaly.
+        
+        Args:
+            input_data: Dictionary or DataFrame with transaction features
+        
+        Returns:
+            int: 1 for anomaly, 0 for normal transaction
+        """
         try:
             if isinstance(input_data, dict):
                 input_df = pd.DataFrame([input_data], columns=self.features)
@@ -30,6 +39,9 @@ class AnomalyDetector:
             result = 1 if prediction[0] == -1 else 0
             logger.info(f"Prediction completed: {'Anomaly' if result else 'Normal'}")
             return result
+        except KeyError as e:
+            logger.error(f"Missing required feature: {str(e)}")
+            raise
         except Exception as e:
             logger.error(f"Error during prediction: {str(e)}")
             raise
