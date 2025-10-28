@@ -90,8 +90,11 @@ class DataPreprocessor(BaseEstimator, TransformerMixin):
 if __name__ == "__main__":
     try:
         data = pd.read_csv("data/raw_transactions.csv")
-        preprocessor = DataPreprocessor()
+        preprocessor = DataPreprocessor(threshold_std=2.0)
         preprocessed_data = preprocessor.fit_transform(data)
         logger.info("Preprocessing completed successfully")
+        logger.info(f"Processed {len(preprocessed_data)} records")
     except FileNotFoundError:
         logger.warning("Sample data file not found - skipping example")
+    except Exception as e:
+        logger.error(f"Error during preprocessing: {e}")

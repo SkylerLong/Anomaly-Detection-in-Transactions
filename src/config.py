@@ -66,6 +66,8 @@ VALIDATION_THRESHOLDS = {
     'min_contamination': 0.001,
     'max_contamination': 0.5,
     'min_data_rows': 10,
-    'max_features': 100  # Maximum number of features
+    'max_features': 100,  # Maximum number of features
+    'min_estimators': 50,  # Minimum number of estimators
+    'max_estimators': 500  # Maximum number of estimators
 }
 

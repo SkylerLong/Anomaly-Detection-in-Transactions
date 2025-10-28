@@ -41,6 +41,10 @@ class AnomalyDetector:
             else:
                 input_df = input_data[self.features]
             
+            # Validate input shape
+            if len(input_df) == 0:
+                raise ValueError("Input data is empty")
+            
             prediction = self.model.predict(input_df)
             result = 1 if prediction[0] == -1 else 0
             logger.info(f"Prediction completed: {'Anomaly' if result else 'Normal'}")
@@ -53,10 +57,15 @@ class AnomalyDetector:
             raise
 
 # Example usage
-detector = AnomalyDetector()
-user_input = {
-    'Transaction_Amount': 1500,
-    'Average_Transaction_Amount': 200,
-    'Frequency_of_Transactions': 5
-}
-print("Anomaly Detected!" if detector.predict(user_input) else "Normal Transaction")
+if __name__ == "__main__":
+    try:
+        detector = AnomalyDetector()
+        user_input = {
+            'Transaction_Amount': 1500,
+            'Average_Transaction_Amount': 200,
+            'Frequency_of_Transactions': 5
+        }
+        result = detector.predict(user_input)
+        print("Anomaly Detected!" if result else "Normal Transaction")
+    except Exception as e:
+        print(f"Error: {e}")

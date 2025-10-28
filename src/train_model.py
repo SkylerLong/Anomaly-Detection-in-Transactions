@@ -8,7 +8,7 @@ import logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-def train_and_evaluate(X_train, X_test, y_test, contamination=0.02):
+def train_and_evaluate(X_train, X_test, y_test, contamination=0.02, n_estimators=200):
     """
     Train Isolation Forest model and evaluate its performance.
     
@@ -17,6 +17,7 @@ def train_and_evaluate(X_train, X_test, y_test, contamination=0.02):
         X_test: Test features  
         y_test: Test labels
         contamination: Expected proportion of anomalies (default: 0.02)
+        n_estimators: Number of trees in the forest (default: 200)
     
     Returns:
         tuple: (trained_model, evaluation_metrics)
@@ -28,7 +29,7 @@ def train_and_evaluate(X_train, X_test, y_test, contamination=0.02):
     model = IsolationForest(
         contamination=contamination,
         random_state=42,
-        n_estimators=200,
+        n_estimators=n_estimators,
         max_samples='auto',
         max_features=1.0  # Use all features
     )
