@@ -7,6 +7,7 @@ and consistent behavior across the application.
 
 import os
 from pathlib import Path
+from typing import Dict, Any
 
 # Project paths
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,7 +22,7 @@ RAW_TRANSACTION_FILE = DATA_DIR / "raw_transactions.csv"
 ISOLATION_FOREST_MODEL = MODEL_DIR / "isolation_forest.pkl"
 
 # Model hyperparameters
-MODEL_CONFIG = {
+MODEL_CONFIG: Dict[str, Any] = {
     'contamination': 0.02,
     'random_state': 42,
     'n_estimators': 200,
@@ -63,7 +64,7 @@ METRIC_NAMES = ['accuracy', 'precision', 'recall', 'f1_score']
 TARGET_NAMES = ['Normal', 'Anomaly']
 
 # Validation thresholds
-VALIDATION_THRESHOLDS = {
+VALIDATION_THRESHOLDS: Dict[str, Any] = {
     'min_contamination': 0.001,
     'max_contamination': 0.5,
     'min_data_rows': 10,

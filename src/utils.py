@@ -5,12 +5,12 @@ from pathlib import Path
 import joblib
 from sklearn.metrics import classification_report
 import logging
-from typing import List, Dict, Any
+from typing import List, Dict, Any, Optional
 
 # Configure logging
 logger = logging.getLogger(__name__)
 
-def load_data(file_path):
+def load_data(file_path: str):
     """
     Load transaction data from CSV with validation.
     
@@ -18,7 +18,7 @@ def load_data(file_path):
         file_path: Path to the CSV file
     
     Returns:
-        DataFrame: Loaded transaction data
+        pd.DataFrame: Loaded transaction data
     """
     if not Path(file_path).exists():
         raise FileNotFoundError(f"Data file not found: {file_path}")
@@ -37,7 +37,7 @@ def load_data(file_path):
         logger.error(f"Error loading data: {str(e)}")
         raise ValueError(f"Error loading data: {str(e)}")
 
-def validate_data(data, required_columns=None):
+def validate_data(data: pd.DataFrame, required_columns: Optional[List[str]] = None) -> bool:
     """
     Validate data structure and required columns.
     
