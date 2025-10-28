@@ -51,11 +51,14 @@ def train_and_evaluate(X_train, X_test, y_test, contamination=0.02, n_estimators
         'accuracy': accuracy_score(y_test, y_pred_binary),
         'precision': precision_score(y_test, y_pred_binary),
         'recall': recall_score(y_test, y_pred_binary),
-        'f1_score': f1_score(y_test, y_pred_binary)
+        'f1_score': f1_score(y_test, y_pred_binary),
+        'n_estimators': n_estimators,
+        'contamination': contamination
     }
     
     print(classification_report(y_test, y_pred_binary, target_names=['Normal', 'Anomaly']))
     print(f"F1 Score: {metrics['f1_score']:.4f}")
     print(f"Accuracy: {metrics['accuracy']:.4f}")
     
+    logger.info(f"Model evaluation completed with {n_estimators} estimators")
     return model, metrics

@@ -54,7 +54,8 @@ PREPROCESSING_CONFIG = {
 LOGGING_CONFIG = {
     'level': os.getenv('LOG_LEVEL', 'INFO'),
     'format': '%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-    'datefmt': '%Y-%m-%d %H:%M:%S'
+    'datefmt': '%Y-%m-%d %H:%M:%S',
+    'enable_file_logging': False  # Set to True to enable file logging
 }
 
 # Evaluation metrics

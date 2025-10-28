@@ -2,6 +2,7 @@ import pandas as pd
 import numpy as np
 from sklearn.base import BaseEstimator, TransformerMixin
 import logging
+from typing import Optional, Tuple
 
 # Configure logging
 logger = logging.getLogger(__name__)
@@ -28,7 +29,7 @@ class DataPreprocessor(BaseEstimator, TransformerMixin):
         self.mean_amount = None
         self.std_amount = None
 
-    def fit(self, X, y=None):
+    def fit(self, X, y=None) -> 'DataPreprocessor':
         """
         Calculate statistics from training data.
         
