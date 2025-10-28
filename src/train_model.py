@@ -28,6 +28,7 @@ def train_and_evaluate(X_train: Any, X_test: Any, y_test: Any, contamination: fl
         raise ValueError(f"Contamination must be between 0 and 0.5, got {contamination}")
     
     logger.info(f"Initializing Isolation Forest with {n_estimators} estimators")
+    logger.info(f"Model parameters - Contamination: {contamination}, Random state: 42")
     model = IsolationForest(
         contamination=contamination,
         random_state=42,

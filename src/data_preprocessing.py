@@ -44,11 +44,14 @@ class DataPreprocessor(BaseEstimator, TransformerMixin):
             raise ValueError("Missing required column: Transaction_Amount")
         
         # Calculate statistics, handling potential NaN values
-        self.mean_amount = X['Transaction_Amount'].mean()
-        self.std_amount = X['Transaction_Amount'].std()
+        transaction_col = X['Transaction_Amount']
+        self.mean_amount = transaction_col.mean()
+        self.std_amount = transaction_col.std()
         
         if pd.isna(self.mean_amount) or pd.isna(self.std_amount):
             raise ValueError("Cannot compute statistics: data contains invalid values")
+        
+        logger.debug(f"Computed statistics from {len(X)} records")
         
         self.anomaly_threshold = self.mean_amount + self.threshold_std * self.std_amount
         

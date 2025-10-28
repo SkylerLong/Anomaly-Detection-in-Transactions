@@ -19,7 +19,8 @@ class AnomalyDetector:
             self.model = joblib.load(model_path)
             self.features = ['Transaction_Amount', 'Average_Transaction_Amount', 'Frequency_of_Transactions']
             logger.info(f"Model loaded successfully from {model_path}")
-            logger.info(f"Model supports {len(self.features)} features")
+            logger.info(f"Model configuration: {len(self.features)} features supported")
+            logger.debug(f"Feature names: {self.features}")
         except FileNotFoundError:
             logger.error(f"Model file not found: {model_path}")
             raise

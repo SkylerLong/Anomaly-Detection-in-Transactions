@@ -139,10 +139,12 @@ def save_metrics(metrics: Dict[str, float], path: str) -> None:
         path: Destination file path
     """
     try:
-        Path(path).parent.mkdir(parents=True, exist_ok=True)
+        output_dir = Path(path).parent
+        output_dir.mkdir(parents=True, exist_ok=True)
+        logger.info(f"Saving metrics to {path}")
         with open(path, 'w') as f:
             json.dump(metrics, f, indent=4)
-        logger.info(f"Metrics saved to {path}")
+        logger.info(f"Metrics saved successfully")
     except Exception as e:
         logger.error(f"Error saving metrics: {str(e)}")
         raise

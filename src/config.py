@@ -46,9 +46,10 @@ ENGINEERED_FEATURES: List[str] = [
 
 # Preprocessing configuration
 PREPROCESSING_CONFIG: Dict[str, Any] = {
-    'threshold_std': 2.0,
-    'fill_missing_value': 0,
-    'normalize_features': True  # Enable feature normalization
+    'threshold_std': 2.0,  # Standard deviations for anomaly threshold
+    'fill_missing_value': 0,  # Value to fill missing data with
+    'normalize_features': True,  # Enable feature normalization
+    'drop_outliers': False  # Whether to drop statistical outliers
 }
 
 # Logging configuration
@@ -56,7 +57,8 @@ LOGGING_CONFIG: Dict[str, Any] = {
     'level': os.getenv('LOG_LEVEL', 'INFO'),
     'format': '%(asctime)s - %(name)s - %(levelname)s - %(message)s',
     'datefmt': '%Y-%m-%d %H:%M:%S',
-    'enable_file_logging': False  # Set to True to enable file logging
+    'enable_file_logging': False,  # Set to True to enable file logging
+    'log_to_console': True  # Enable console logging
 }
 
 # Evaluation metrics
