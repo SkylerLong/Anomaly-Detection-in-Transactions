@@ -56,10 +56,12 @@ def validate_data(data: pd.DataFrame, required_columns: Optional[List[str]] = No
     if missing_columns:
         raise ValueError(f"Missing required columns: {missing_columns}")
     
-    if data.isnull().any().any():
-        logger.warning("Data contains missing values")
+    # Check for missing values in required columns
+    null_counts = data[required_columns].isnull().sum()
+    if null_counts.any():
+        logger.warning(f"Data contains missing values in: {null_counts[null_counts > 0].to_dict()}")
     
-    logger.info("Data validation passed")
+    logger.info("Data validation passed successfully")
     return True
 
 def save_model(model: Any, path: str) -> None:

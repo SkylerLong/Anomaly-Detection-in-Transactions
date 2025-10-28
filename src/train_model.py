@@ -27,6 +27,7 @@ def train_and_evaluate(X_train: Any, X_test: Any, y_test: Any, contamination: fl
     if not 0 < contamination < 0.5:
         raise ValueError(f"Contamination must be between 0 and 0.5, got {contamination}")
     
+    logger.info(f"Initializing Isolation Forest with {n_estimators} estimators")
     model = IsolationForest(
         contamination=contamination,
         random_state=42,
@@ -34,7 +35,9 @@ def train_and_evaluate(X_train: Any, X_test: Any, y_test: Any, contamination: fl
         max_samples='auto',
         max_features=1.0  # Use all features
     )
+    logger.info("Training model on training data...")
     model.fit(X_train)
+    logger.info("Model training completed")
     
     # Ensure models directory exists
     os.makedirs("models", exist_ok=True)

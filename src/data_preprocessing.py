@@ -52,7 +52,9 @@ class DataPreprocessor(BaseEstimator, TransformerMixin):
         
         self.anomaly_threshold = self.mean_amount + self.threshold_std * self.std_amount
         
-        logger.info(f"Preprocessor fitted - Threshold: {self.anomaly_threshold:.2f}")
+        logger.info(f"Preprocessor fitted successfully")
+        logger.info(f"Statistics - Mean: {self.mean_amount:.2f}, Std: {self.std_amount:.2f}")
+        logger.info(f"Anomaly threshold: {self.anomaly_threshold:.2f}")
         return self
 
     def transform(self, X: pd.DataFrame) -> pd.DataFrame:

@@ -47,9 +47,14 @@ class AnomalyDetector:
             if len(input_df) == 0:
                 raise ValueError("Input data is empty")
             
+            # Check for missing values in features
+            if input_df.isnull().any().any():
+                logger.warning("Input data contains missing values")
+            
             prediction = self.model.predict(input_df)
             result = 1 if prediction[0] == -1 else 0
-            logger.info(f"Prediction completed: {'Anomaly' if result else 'Normal'}")
+            prediction_type = 'Anomaly' if result else 'Normal'
+            logger.info(f"Prediction completed: {prediction_type}")
             return result
         except KeyError as e:
             logger.error(f"Missing required feature: {str(e)}")

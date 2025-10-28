@@ -21,24 +21,24 @@ RAW_TRANSACTION_FILE = DATA_DIR / "raw_transactions.csv"
 # Model files
 ISOLATION_FOREST_MODEL = MODEL_DIR / "isolation_forest.pkl"
 
-# Model hyperparameters
+# Model hyperparameters - Isolation Forest configuration
 MODEL_CONFIG: Dict[str, Any] = {
-    'contamination': 0.02,
-    'random_state': 42,
-    'n_estimators': 200,
-    'max_samples': 'auto',
+    'contamination': 0.02,  # Expected proportion of anomalies
+    'random_state': 42,  # Reproducibility seed
+    'n_estimators': 200,  # Number of trees in the forest
+    'max_samples': 'auto',  # Sample size for each tree
     'n_jobs': -1,  # Use all available cores
     'max_features': 1.0  # Use all features
 }
 
-# Feature configuration
+# Feature configuration - Core features required for anomaly detection
 REQUIRED_FEATURES: List[str] = [
     'Transaction_Amount',
     'Average_Transaction_Amount',
     'Frequency_of_Transactions'
 ]
 
-# Additional feature names
+# Engineered features created during preprocessing
 ENGINEERED_FEATURES: List[str] = [
     'Is_Anomaly',
     'Transaction_ZScore'
