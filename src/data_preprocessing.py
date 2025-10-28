@@ -70,8 +70,10 @@ class DataPreprocessor(BaseEstimator, TransformerMixin):
         
         X = X.copy()
         
-        # Add anomaly indicator
+        # Add anomaly indicator based on threshold
         X['Is_Anomaly'] = (X['Transaction_Amount'] > self.anomaly_threshold).astype(int)
+        anomaly_count = X['Is_Anomaly'].sum()
+        anomaly_rate = anomaly_count / len(X) if len(X) > 0 else 0
         
         # Add z-score feature with protection against division by zero
         if self.std_amount > 0:
@@ -84,7 +86,7 @@ class DataPreprocessor(BaseEstimator, TransformerMixin):
         if self.handle_nulls:
             X = X.fillna(0)
         
-        logger.info(f"Data transformed - {X['Is_Anomaly'].sum()} anomalies detected")
+        logger.info(f"Data transformed - {anomaly_count} anomalies detected ({anomaly_rate:.2%})")
         return X
 
 # Example usage

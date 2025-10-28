@@ -25,7 +25,7 @@ def train_and_evaluate(X_train: Any, X_test: Any, y_test: Any, contamination: fl
     """
     # Validate contamination parameter
     if not 0 < contamination < 0.5:
-        raise ValueError("Contamination must be between 0 and 0.5")
+        raise ValueError(f"Contamination must be between 0 and 0.5, got {contamination}")
     
     model = IsolationForest(
         contamination=contamination,
@@ -41,7 +41,7 @@ def train_and_evaluate(X_train: Any, X_test: Any, y_test: Any, contamination: fl
     
     # Save model
     joblib.dump(model, "models/isolation_forest.pkl")
-    logger.info("Model saved successfully")
+    logger.info(f"Model saved successfully with contamination={contamination}, n_estimators={n_estimators}")
     
     # Evaluate
     y_pred = model.predict(X_test)
@@ -57,9 +57,15 @@ def train_and_evaluate(X_train: Any, X_test: Any, y_test: Any, contamination: fl
         'contamination': contamination
     }
     
+    print("\n" + "="*50)
+    print("CLASSIFICATION REPORT")
+    print("="*50)
     print(classification_report(y_test, y_pred_binary, target_names=['Normal', 'Anomaly']))
     print(f"F1 Score: {metrics['f1_score']:.4f}")
     print(f"Accuracy: {metrics['accuracy']:.4f}")
+    print(f"Precision: {metrics['precision']:.4f}")
+    print(f"Recall: {metrics['recall']:.4f}")
+    print("="*50)
     
     logger.info(f"Model evaluation completed with {n_estimators} estimators")
     return model, metrics

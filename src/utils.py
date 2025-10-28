@@ -28,7 +28,8 @@ def load_data(file_path: str) -> pd.DataFrame:
         if data.empty:
             raise ValueError("Data file is empty")
         
-        logger.info(f"Data loaded successfully with {data.shape[0]} records and {data.shape[1]} features")
+        logger.info(f"Data loaded successfully - Records: {data.shape[0]}, Features: {data.shape[1]}")
+        logger.info(f"Memory usage: {data.memory_usage(deep=True).sum() / 1024:.2f} KB")
         return data
     except pd.errors.EmptyDataError:
         logger.error("CSV file is empty or malformed")
