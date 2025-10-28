@@ -61,7 +61,7 @@ def validate_data(data: pd.DataFrame, required_columns: Optional[List[str]] = No
     logger.info("Data validation passed")
     return True
 
-def save_model(model, path):
+def save_model(model: Any, path: str) -> None:
     """
     Save trained model to disk with validation.
     
@@ -77,7 +77,7 @@ def save_model(model, path):
         logger.error(f"Error saving model: {str(e)}")
         raise
 
-def load_model(path):
+def load_model(path: str) -> Any:
     """
     Load trained model from disk with validation.
     
@@ -98,7 +98,7 @@ def load_model(path):
         logger.error(f"Model loading failed: {str(e)}")
         raise FileNotFoundError(f"Model loading failed: {str(e)}")
 
-def evaluate_model(y_true, y_pred):
+def evaluate_model(y_true: List[int], y_pred: List[int]) -> Dict[str, float]:
     """
     Generate classification metrics with validation.
     
@@ -122,7 +122,7 @@ def evaluate_model(y_true, y_pred):
     logger.info(f"Model evaluation completed - F1 Score: {metrics['f1']:.4f}")
     return metrics
 
-def save_metrics(metrics, path):
+def save_metrics(metrics: Dict[str, float], path: str) -> None:
     """
     Save evaluation metrics to JSON with validation.
     

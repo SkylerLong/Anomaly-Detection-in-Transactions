@@ -55,7 +55,7 @@ class DataPreprocessor(BaseEstimator, TransformerMixin):
         logger.info(f"Preprocessor fitted - Threshold: {self.anomaly_threshold:.2f}")
         return self
 
-    def transform(self, X):
+    def transform(self, X: pd.DataFrame) -> pd.DataFrame:
         """
         Transform data by adding anomaly indicators and engineered features.
         

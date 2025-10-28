@@ -8,7 +8,7 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 class AnomalyDetector:
-    def __init__(self, model_path="models/isolation_forest.pkl"):
+    def __init__(self, model_path: str = "models/isolation_forest.pkl") -> None:
         """
         Initialize the AnomalyDetector with a trained model.
         
@@ -26,7 +26,7 @@ class AnomalyDetector:
             logger.error(f"Error loading model: {str(e)}")
             raise
 
-    def predict(self, input_data):
+    def predict(self, input_data: Union[Dict, pd.DataFrame]) -> int:
         """
         Predict if input data is an anomaly.
         

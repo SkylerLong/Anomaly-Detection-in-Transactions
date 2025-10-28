@@ -1,5 +1,6 @@
 from sklearn.ensemble import IsolationForest
 from sklearn.metrics import classification_report, f1_score, accuracy_score, precision_score, recall_score
+from typing import Tuple, Dict, Any
 import joblib
 import os
 import logging
@@ -8,7 +9,7 @@ import logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-def train_and_evaluate(X_train, X_test, y_test, contamination=0.02, n_estimators=200):
+def train_and_evaluate(X_train: Any, X_test: Any, y_test: Any, contamination: float = 0.02, n_estimators: int = 200) -> Tuple[Any, Dict[str, Any]]:
     """
     Train Isolation Forest model and evaluate its performance.
     
