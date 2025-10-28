@@ -7,7 +7,7 @@ and consistent behavior across the application.
 
 import os
 from pathlib import Path
-from typing import Dict, Any
+from typing import Dict, Any, List
 
 # Project paths
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -32,27 +32,27 @@ MODEL_CONFIG: Dict[str, Any] = {
 }
 
 # Feature configuration
-REQUIRED_FEATURES = [
+REQUIRED_FEATURES: List[str] = [
     'Transaction_Amount',
     'Average_Transaction_Amount',
     'Frequency_of_Transactions'
 ]
 
 # Additional feature names
-ENGINEERED_FEATURES = [
+ENGINEERED_FEATURES: List[str] = [
     'Is_Anomaly',
     'Transaction_ZScore'
 ]
 
 # Preprocessing configuration
-PREPROCESSING_CONFIG = {
+PREPROCESSING_CONFIG: Dict[str, Any] = {
     'threshold_std': 2.0,
     'fill_missing_value': 0,
     'normalize_features': True  # Enable feature normalization
 }
 
 # Logging configuration
-LOGGING_CONFIG = {
+LOGGING_CONFIG: Dict[str, Any] = {
     'level': os.getenv('LOG_LEVEL', 'INFO'),
     'format': '%(asctime)s - %(name)s - %(levelname)s - %(message)s',
     'datefmt': '%Y-%m-%d %H:%M:%S',
@@ -60,8 +60,8 @@ LOGGING_CONFIG = {
 }
 
 # Evaluation metrics
-METRIC_NAMES = ['accuracy', 'precision', 'recall', 'f1_score']
-TARGET_NAMES = ['Normal', 'Anomaly']
+METRIC_NAMES: List[str] = ['accuracy', 'precision', 'recall', 'f1_score']
+TARGET_NAMES: List[str] = ['Normal', 'Anomaly']
 
 # Validation thresholds
 VALIDATION_THRESHOLDS: Dict[str, Any] = {

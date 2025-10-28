@@ -10,7 +10,7 @@ from typing import List, Dict, Any, Optional
 # Configure logging
 logger = logging.getLogger(__name__)
 
-def load_data(file_path: str):
+def load_data(file_path: str) -> pd.DataFrame:
     """
     Load transaction data from CSV with validation.
     

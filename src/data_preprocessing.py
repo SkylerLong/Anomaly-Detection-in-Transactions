@@ -15,7 +15,7 @@ class DataPreprocessor(BaseEstimator, TransformerMixin):
     based on transaction amounts using z-score methodology.
     """
     
-    def __init__(self, threshold_std=2.0, handle_nulls=True):
+    def __init__(self, threshold_std: float = 2.0, handle_nulls: bool = True) -> None:
         """
         Initialize the preprocessor.
         
@@ -29,7 +29,7 @@ class DataPreprocessor(BaseEstimator, TransformerMixin):
         self.mean_amount = None
         self.std_amount = None
 
-    def fit(self, X, y=None) -> 'DataPreprocessor':
+    def fit(self, X: pd.DataFrame, y: Optional[Any] = None) -> 'DataPreprocessor':
         """
         Calculate statistics from training data.
         
