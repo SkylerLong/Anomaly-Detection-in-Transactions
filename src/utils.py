@@ -14,11 +14,18 @@ def load_data(file_path: str) -> pd.DataFrame:
     """
     Load transaction data from CSV with validation.
     
+    This function loads transaction data from a CSV file and performs basic
+    validation checks including existence check and empty data check.
+    
     Args:
         file_path: Path to the CSV file
     
     Returns:
         pd.DataFrame: Loaded transaction data
+    
+    Raises:
+        FileNotFoundError: If the file doesn't exist
+        ValueError: If the file is empty or malformed
     """
     if not Path(file_path).exists():
         raise FileNotFoundError(f"Data file not found: {file_path}")
@@ -110,15 +117,21 @@ def evaluate_model(y_true: List[int], y_pred: List[int]) -> Dict[str, float]:
     """
     Generate classification metrics with validation.
     
+    This function calculates comprehensive evaluation metrics for anomaly detection
+    including accuracy, precision, recall, and F1 score.
+    
     Args:
         y_true: True labels
         y_pred: Predicted labels
     
     Returns:
         dict: Dictionary containing evaluation metrics
+    
+    Raises:
+        ValueError: If input lengths don't match
     """
     if len(y_true) != len(y_pred):
-        raise ValueError("Length mismatch between true labels and predictions")
+        raise ValueError(f"Length mismatch between true labels ({len(y_true)}) and predictions ({len(y_pred)})")
     
     report = classification_report(y_true, y_pred, target_names=['Normal', 'Anomaly'], output_dict=True)
     metrics = {

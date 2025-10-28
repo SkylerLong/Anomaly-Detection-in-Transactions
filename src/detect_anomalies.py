@@ -8,6 +8,13 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 class AnomalyDetector:
+    """
+    Anomaly detector using Isolation Forest model.
+    
+    This class provides functionality to detect anomalies in transaction data
+    using a pre-trained Isolation Forest model.
+    """
+    
     def __init__(self, model_path: str = "models/isolation_forest.pkl") -> None:
         """
         Initialize the AnomalyDetector with a trained model.

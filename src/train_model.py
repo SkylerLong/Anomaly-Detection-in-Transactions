@@ -13,6 +13,10 @@ def train_and_evaluate(X_train: Any, X_test: Any, y_test: Any, contamination: fl
     """
     Train Isolation Forest model and evaluate its performance.
     
+    This function trains an Isolation Forest model on the training data and
+    evaluates its performance on test data, returning both the trained model
+    and comprehensive evaluation metrics.
+    
     Args:
         X_train: Training features
         X_test: Test features  
@@ -22,6 +26,9 @@ def train_and_evaluate(X_train: Any, X_test: Any, y_test: Any, contamination: fl
     
     Returns:
         tuple: (trained_model, evaluation_metrics)
+    
+    Raises:
+        ValueError: If contamination parameter is invalid
     """
     # Validate contamination parameter
     if not 0 < contamination < 0.5:

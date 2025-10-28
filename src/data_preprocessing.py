@@ -13,6 +13,11 @@ class DataPreprocessor(BaseEstimator, TransformerMixin):
     
     This transformer applies statistical methods to identify potential anomalies
     based on transaction amounts using z-score methodology.
+    
+    Features:
+    - Calculates mean and standard deviation of transaction amounts
+    - Creates anomaly indicators based on statistical thresholds
+    - Generates z-score features for additional analysis
     """
     
     def __init__(self, threshold_std: float = 2.0, handle_nulls: bool = True) -> None:
