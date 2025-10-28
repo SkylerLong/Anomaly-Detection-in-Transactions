@@ -8,6 +8,12 @@ logger = logging.getLogger(__name__)
 
 class AnomalyDetector:
     def __init__(self, model_path="models/isolation_forest.pkl"):
+        """
+        Initialize the AnomalyDetector with a trained model.
+        
+        Args:
+            model_path: Path to the saved model file
+        """
         try:
             self.model = joblib.load(model_path)
             self.features = ['Transaction_Amount', 'Average_Transaction_Amount', 'Frequency_of_Transactions']

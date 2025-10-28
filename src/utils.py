@@ -37,7 +37,16 @@ def load_data(file_path):
         raise ValueError(f"Error loading data: {str(e)}")
 
 def validate_data(data, required_columns=None):
-    """Validate data structure and required columns"""
+    """
+    Validate data structure and required columns.
+    
+    Args:
+        data: DataFrame to validate
+        required_columns: List of required column names
+    
+    Returns:
+        bool: True if validation passes
+    """
     if required_columns is None:
         required_columns = ['Transaction_Amount', 'Average_Transaction_Amount', 'Frequency_of_Transactions']
     
@@ -52,7 +61,13 @@ def validate_data(data, required_columns=None):
     return True
 
 def save_model(model, path):
-    """Save trained model to disk with validation"""
+    """
+    Save trained model to disk with validation.
+    
+    Args:
+        model: Trained model to save
+        path: Destination file path
+    """
     try:
         Path(path).parent.mkdir(parents=True, exist_ok=True)
         joblib.dump(model, path)

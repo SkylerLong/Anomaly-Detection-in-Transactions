@@ -29,7 +29,8 @@ def train_and_evaluate(X_train, X_test, y_test, contamination=0.02):
         contamination=contamination,
         random_state=42,
         n_estimators=200,
-        max_samples='auto'
+        max_samples='auto',
+        max_features=1.0  # Use all features
     )
     model.fit(X_train)
     

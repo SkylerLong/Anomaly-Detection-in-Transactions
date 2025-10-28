@@ -26,7 +26,8 @@ MODEL_CONFIG = {
     'random_state': 42,
     'n_estimators': 200,
     'max_samples': 'auto',
-    'n_jobs': -1  # Use all available cores
+    'n_jobs': -1,  # Use all available cores
+    'max_features': 1.0  # Use all features
 }
 
 # Feature configuration
@@ -39,7 +40,8 @@ REQUIRED_FEATURES = [
 # Preprocessing configuration
 PREPROCESSING_CONFIG = {
     'threshold_std': 2.0,
-    'fill_missing_value': 0
+    'fill_missing_value': 0,
+    'normalize_features': True  # Enable feature normalization
 }
 
 # Logging configuration
