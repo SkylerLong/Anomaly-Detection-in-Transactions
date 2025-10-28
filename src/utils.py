@@ -30,6 +30,7 @@ def load_data(file_path: str) -> pd.DataFrame:
         
         logger.info(f"Data loaded successfully - Records: {data.shape[0]}, Features: {data.shape[1]}")
         logger.info(f"Memory usage: {data.memory_usage(deep=True).sum() / 1024:.2f} KB")
+        logger.debug(f"Column names: {list(data.columns)}")
         return data
     except pd.errors.EmptyDataError:
         logger.error("CSV file is empty or malformed")
@@ -73,9 +74,11 @@ def save_model(model: Any, path: str) -> None:
         path: Destination file path
     """
     try:
-        Path(path).parent.mkdir(parents=True, exist_ok=True)
+        model_dir = Path(path).parent
+        model_dir.mkdir(parents=True, exist_ok=True)
+        logger.info(f"Saving model to {path}")
         joblib.dump(model, path)
-        logger.info(f"Model saved to {path}")
+        logger.info(f"Model saved successfully to {path}")
     except Exception as e:
         logger.error(f"Error saving model: {str(e)}")
         raise
@@ -94,8 +97,10 @@ def load_model(path: str) -> Any:
         raise FileNotFoundError(f"Model file not found: {path}")
     
     try:
+        logger.info(f"Loading model from {path}")
         model = joblib.load(path)
-        logger.info(f"Model loaded from {path}")
+        file_size = Path(path).stat().st_size / 1024
+        logger.info(f"Model loaded successfully ({file_size:.2f} KB)")
         return model
     except Exception as e:
         logger.error(f"Model loading failed: {str(e)}")

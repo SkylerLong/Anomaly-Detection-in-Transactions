@@ -63,13 +63,14 @@ LOGGING_CONFIG: Dict[str, Any] = {
 METRIC_NAMES: List[str] = ['accuracy', 'precision', 'recall', 'f1_score']
 TARGET_NAMES: List[str] = ['Normal', 'Anomaly']
 
-# Validation thresholds
+# Validation thresholds for data and model parameters
 VALIDATION_THRESHOLDS: Dict[str, Any] = {
     'min_contamination': 0.001,
     'max_contamination': 0.5,
     'min_data_rows': 10,
     'max_features': 100,  # Maximum number of features
     'min_estimators': 50,  # Minimum number of estimators
-    'max_estimators': 500  # Maximum number of estimators
+    'max_estimators': 500,  # Maximum number of estimators
+    'min_std_dev': 0.1  # Minimum standard deviation threshold
 }
 

@@ -71,4 +71,5 @@ def train_and_evaluate(X_train: Any, X_test: Any, y_test: Any, contamination: fl
     print("="*50)
     
     logger.info(f"Model evaluation completed with {n_estimators} estimators")
+    logger.info(f"Final metrics - Accuracy: {metrics['accuracy']:.4f}, F1: {metrics['f1_score']:.4f}")
     return model, metrics

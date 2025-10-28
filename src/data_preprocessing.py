@@ -88,7 +88,9 @@ class DataPreprocessor(BaseEstimator, TransformerMixin):
         if self.handle_nulls:
             X = X.fillna(0)
         
-        logger.info(f"Data transformed - {anomaly_count} anomalies detected ({anomaly_rate:.2%})")
+        logger.info(f"Data transformation completed")
+        logger.info(f"Anomalies detected: {anomaly_count} ({anomaly_rate:.2%})")
+        logger.debug(f"Data shape after transformation: {X.shape}")
         return X
 
 # Example usage
