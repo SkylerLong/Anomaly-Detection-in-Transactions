@@ -97,8 +97,8 @@ class DataPreprocessor(BaseEstimator, TransformerMixin):
             X = X.fillna(0)
         
         logger.info(f"Data transformation completed")
+        logger.info(f"Transformed data: {len(X)} records, {X.shape[1]} features")
         logger.info(f"Anomalies detected: {anomaly_count} ({anomaly_rate:.2%})")
-        logger.debug(f"Data shape after transformation: {X.shape}")
         return X
 
 # Example usage

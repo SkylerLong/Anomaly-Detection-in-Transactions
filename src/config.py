@@ -9,7 +9,7 @@ import os
 from pathlib import Path
 from typing import Dict, Any, List
 
-# Project paths
+# Project paths - Ensure these directories exist
 BASE_DIR = Path(__file__).resolve().parent.parent
 DATA_DIR = BASE_DIR / "data"
 MODEL_DIR = BASE_DIR / "models"
@@ -22,6 +22,7 @@ RAW_TRANSACTION_FILE = DATA_DIR / "raw_transactions.csv"
 ISOLATION_FOREST_MODEL = MODEL_DIR / "isolation_forest.pkl"
 
 # Model hyperparameters - Isolation Forest configuration
+# These are default parameters; they can be overridden during training
 MODEL_CONFIG: Dict[str, Any] = {
     'contamination': 0.02,  # Expected proportion of anomalies
     'random_state': 42,  # Reproducibility seed

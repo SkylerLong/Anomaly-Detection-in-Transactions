@@ -54,11 +54,13 @@ def train_and_evaluate(X_train: Any, X_test: Any, y_test: Any, contamination: fl
     joblib.dump(model, "models/isolation_forest.pkl")
     logger.info(f"Model saved successfully with contamination={contamination}, n_estimators={n_estimators}")
     
-    # Evaluate
+    # Evaluate model performance
+    logger.info("Starting model evaluation on test data...")
     y_pred = model.predict(X_test)
     y_pred_binary = [1 if pred == -1 else 0 for pred in y_pred]
     
     # Calculate comprehensive metrics
+    logger.info("Computing evaluation metrics...")
     metrics = {
         'accuracy': accuracy_score(y_test, y_pred_binary),
         'precision': precision_score(y_test, y_pred_binary),
